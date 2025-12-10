@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Ticket Relationship: One Admin has many Tickets
+model ticket {
+  id          Int       @id @default(autoincrement())
+  date        DateTime  @default(now())
+  startedTime DateTime
+  company     String
+  location    String
+  person      String
+  issue       String
+  resolution  String?
+  comments    String?
+  timeEnd     DateTime?
+  totalTime   Float?
+  status      String    @default("Unassigned")
+  
+  // Relations
+  adminId Int?
+  admin   admin? @relation(fields: [adminId], references: [id])
+}
+
+model timelog {
+  id         Int       @id @default(autoincrement())
+  date       DateTime  @default(now())
+  timeIn     DateTime
+  timeOut    DateTime?
+  lunchStart DateTime?
+  lunchEnd   DateTime?
+  mileage    Float?    @default(0.0)
+
+  // Relations
+  adminId Int?
+  admin   admin? @relation(fields: [adminId], references: [id])
+}
+
+model admin {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  password String
+  name     String
+  tickets  ticket[]
+  timelogs timelog[]
+}
