@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { TicketSheet } from "@/components/TicketSheet";
 import {
   Select,
   SelectContent,
@@ -45,6 +46,10 @@ export default function TicketsPage() {
   // Sort State
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [sortBy, setSortBy] = useState("date"); // 'id', 'company', 'issue', 'assignee', 'status', 'date'
+
+  // Sheet State
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [selectedTicketId, setSelectedTicketId] = useState<number | null>(null);
 
   // Debounce search
   const [debouncedSearch, setDebouncedSearch] = useState(search);
@@ -120,6 +125,15 @@ export default function TicketsPage() {
       setSortBy(field);
       setSortOrder("asc");
     }
+  };
+
+  const handleOpenTicket = (ticketId: number) => {
+    setSelectedTicketId(ticketId);
+    setSheetOpen(true);
+  };
+
+  const handleTicketUpdated = () => {
+    fetchTickets(currentPage);
   };
 
   // if (loading) return <div className="p-8 text-center">Loading tickets...</div>;
@@ -274,12 +288,12 @@ export default function TicketsPage() {
                     className="cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
                   >
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-blue-600 dark:text-blue-400">
-                      <Link
-                        href={`/tickets/${ticket.id}`}
+                      <button
+                        onClick={() => handleOpenTicket(ticket.id)}
                         className="hover:underline"
                       >
                         #{ticket.id}
-                      </Link>
+                      </button>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
                       {new Date(ticket.startedTime).toLocaleString()}
@@ -310,12 +324,12 @@ export default function TicketsPage() {
                       </span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-sm">
-                      <Link
-                        href={`/tickets/${ticket.id}`}
+                      <button
+                        onClick={() => handleOpenTicket(ticket.id)}
                         className="font-medium text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                       >
                         Edit / View
-                      </Link>
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -354,6 +368,13 @@ export default function TicketsPage() {
           </div>
         </div>
       </div>
+
+      <TicketSheet
+        ticketId={selectedTicketId}
+        open={sheetOpen}
+        onOpenChange={setSheetOpen}
+        onTicketUpdated={handleTicketUpdated}
+      />
     </div>
   );
 }
