@@ -17,6 +17,14 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Search } from "lucide-react";
 
 interface Ticket {
@@ -224,118 +232,112 @@ export default function TicketsPage() {
         {/* {loading ? <div className="p-8 text-center">Loading tickets...</div> : (
                     <> */}
         <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-gray-700">
-              <tr>
-                <th
-                  className="item-center flex cursor-pointer gap-1 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+          <Table className="table-fixed">
+            <TableHeader className="bg-gray-50 dark:bg-gray-700">
+              <TableRow>
+                <TableHead
+                  className="w-[60px] cursor-pointer hover:text-gray-700 dark:hover:text-gray-100"
                   onClick={() => toggleSort("id")}
                 >
-                  ID
-                  {sortBy === "id" && (
-                    <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
-                  )}
-                </th>
-                <th
-                  className="cursor-pointer gap-1 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  <span className="flex items-center gap-1">
+                    ID
+                    {sortBy === "id" && (
+                      <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
+                    )}
+                  </span>
+                </TableHead>
+                <TableHead
+                  className="w-[180px] cursor-pointer hover:text-gray-700 dark:hover:text-gray-100"
                   onClick={() => toggleSort("date")}
                 >
-                  Date/Time
-                  {sortBy === "date" && (
-                    <span className="ml-1">
-                      {sortOrder === "asc" ? "↑" : "↓"}
-                    </span>
-                  )}
-                </th>
-                <th
-                  className="cursor-pointer gap-1 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  <span className="flex items-center gap-1">
+                    Date/Time
+                    {sortBy === "date" && (
+                      <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
+                    )}
+                  </span>
+                </TableHead>
+                <TableHead
+                  className="w-[150px] cursor-pointer hover:text-gray-700 dark:hover:text-gray-100"
                   onClick={() => toggleSort("company")}
                 >
-                  Company
-                  {sortBy === "company" && (
-                    <span className="ml-1">
-                      {sortOrder === "asc" ? "↑" : "↓"}
-                    </span>
-                  )}
-                </th>
-                <th
-                  className="cursor-pointer gap-1 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  <span className="flex items-center gap-1">
+                    Company
+                    {sortBy === "company" && (
+                      <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
+                    )}
+                  </span>
+                </TableHead>
+                <TableHead
+                  className="cursor-pointer hover:text-gray-700 dark:hover:text-gray-100"
                   onClick={() => toggleSort("issue")}
                 >
-                  Issue
-                  {sortBy === "issue" && (
-                    <span className="ml-1">
-                      {sortOrder === "asc" ? "↑" : "↓"}
-                    </span>
-                  )}
-                </th>
-                <th
-                  className="cursor-pointer gap-1 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  <span className="flex items-center gap-1">
+                    Issue
+                    {sortBy === "issue" && (
+                      <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
+                    )}
+                  </span>
+                </TableHead>
+                <TableHead
+                  className="w-[120px] cursor-pointer hover:text-gray-700 dark:hover:text-gray-100"
                   onClick={() => toggleSort("assignee")}
                 >
-                  Assignee
-                  {sortBy === "assignee" && (
-                    <span className="ml-1">
-                      {sortOrder === "asc" ? "↑" : "↓"}
-                    </span>
-                  )}
-                </th>
-                <th
-                  className="cursor-pointer gap-1 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  <span className="flex items-center gap-1">
+                    Assignee
+                    {sortBy === "assignee" && (
+                      <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
+                    )}
+                  </span>
+                </TableHead>
+                <TableHead
+                  className="w-[100px] cursor-pointer hover:text-gray-700 dark:hover:text-gray-100"
                   onClick={() => toggleSort("status")}
                 >
-                  Status
-                  {sortBy === "status" && (
-                    <span className="ml-1">
-                      {sortOrder === "asc" ? "↑" : "↓"}
-                    </span>
-                  )}
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
+                  <span className="flex items-center gap-1">
+                    Status
+                    {sortBy === "status" && (
+                      <span>{sortOrder === "asc" ? "↑" : "↓"}</span>
+                    )}
+                  </span>
+                </TableHead>
+                <TableHead className="w-[90px]">Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {tickets.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={7}
-                    className="px-6 py-4 text-center text-gray-500"
-                  >
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center text-gray-500">
                     No tickets found.
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ) : (
                 tickets.map((ticket) => (
-                  <tr
-                    key={ticket.id}
-                    className="cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
-                  >
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-blue-600 dark:text-blue-400">
+                  <TableRow key={ticket.id} className="cursor-pointer">
+                    <TableCell className="text-blue-600 dark:text-blue-400">
                       <button
                         onClick={() => handleOpenTicket(ticket.id)}
                         className="hover:underline"
                       >
                         #{ticket.id}
                       </button>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                    </TableCell>
+                    <TableCell className="text-gray-500 dark:text-gray-400">
                       {new Date(ticket.startedTime).toLocaleString()}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                    </TableCell>
+                    <TableCell>
                       <div>{ticket.company}</div>
                       <div className="text-xs text-gray-500">
                         {ticket.person}
                       </div>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                    </TableCell>
+                    <TableCell className="text-gray-500 dark:text-gray-400 whitespace-normal">
                       {ticket.issue}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                    </TableCell>
+                    <TableCell className="text-gray-500 dark:text-gray-400">
                       {ticket.admin?.name || "Unassigned"}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">
+                    </TableCell>
+                    <TableCell>
                       <span
                         className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
                           ticket.status === "Unassigned"
@@ -347,20 +349,20 @@ export default function TicketsPage() {
                       >
                         {ticket.status}
                       </span>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm">
+                    </TableCell>
+                    <TableCell>
                       <button
                         onClick={() => handleOpenTicket(ticket.id)}
                         className="font-medium text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                       >
                         Edit / View
                       </button>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))
               )}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
 
         <div className="mt-4 flex items-center justify-between">
