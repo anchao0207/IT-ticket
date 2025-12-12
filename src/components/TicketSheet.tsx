@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
@@ -16,6 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 interface Admin {
   id: number;
@@ -203,7 +206,7 @@ export function TicketSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
+      <SheetContent className="w-full sm:max-w-2xl overflow-y-auto bg-gray-50 dark:bg-gray-900">
         <SheetHeader>
           <SheetTitle>
             {loading
@@ -212,6 +215,9 @@ export function TicketSheet({
               ? "Ticket not found"
               : `Ticket #${ticket.id}`}
           </SheetTitle>
+          <SheetDescription>
+            Make changes to your ticket here. Click save when you&apos;re done.
+          </SheetDescription>
         </SheetHeader>
 
         {loading ? (
@@ -226,7 +232,7 @@ export function TicketSheet({
               </div>
             )}
 
-            <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 px-4">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 px-4">
               {/* Editable Details Column */}
               <div className="space-y-4">
                 <h3 className="font-semibold text-gray-700 dark:text-gray-300">
@@ -265,36 +271,32 @@ export function TicketSheet({
                 )}
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Company
                   </label>
-                  <input
-                    type="text"
+                  <Input
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     disabled={!canEdit}
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100 disabled:text-gray-500 dark:border-gray-600 dark:bg-gray-700"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Contact Person
                   </label>
-                  <input
-                    type="text"
+                  <Input
                     value={person}
                     onChange={(e) => setPerson(e.target.value)}
                     disabled={!canEdit}
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100 disabled:text-gray-500 dark:border-gray-600 dark:bg-gray-700"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Location
                   </label>
-                  <select
+                  {/* <select
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     disabled={!canEdit}
@@ -302,19 +304,31 @@ export function TicketSheet({
                   >
                     <option value="remote">Remote</option>
                     <option value="on-site">On-Site</option>
-                  </select>
+                  </select> */}
+                  <Select
+                    value={location}
+                    onValueChange={setLocation}
+                    disabled={!canEdit}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a location" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="remote">Remote</SelectItem>
+                      <SelectItem value="on-site">On-Site</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Issue
                   </label>
-                  <textarea
+                  <Textarea
                     value={issue}
                     onChange={(e) => setIssue(e.target.value)}
                     rows={4}
                     disabled={!canEdit}
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100 disabled:text-gray-500 dark:border-gray-600 dark:bg-gray-700"
                   />
                 </div>
               </div>
@@ -375,36 +389,35 @@ export function TicketSheet({
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Resolution / Notes
                   </label>
-                  <textarea
+                  <Textarea
                     value={resolution}
                     onChange={(e) => setResolution(e.target.value)}
-                    rows={3}
                     disabled={!canEdit}
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100 disabled:text-gray-500 dark:border-gray-600 dark:bg-gray-700"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Private Comments
                   </label>
-                  <textarea
+                  <Textarea
                     value={comments}
                     onChange={(e) => setComments(e.target.value)}
-                    rows={2}
                     disabled={!canEdit}
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100 disabled:text-gray-500 dark:border-gray-600 dark:bg-gray-700"
                   />
                 </div>
 
                 {canEdit && (
                   <div className="flex flex-col gap-2 pt-4">
-                    <Button onClick={handleSave} className="w-full">
+                    <Button
+                      onClick={handleSave}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    >
                       Save Changes
                     </Button>
                     <Button
                       onClick={handleDelete}
                       variant="outline"
-                      className="w-full border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
+                      className="w-full border-red-500 text-red-500! hover:bg-red-50 dark:hover:bg-red-900/20"
                     >
                       Delete Ticket
                     </Button>

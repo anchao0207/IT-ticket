@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { TicketSheet } from "@/components/TicketSheet";
+import { NewTicketDialog } from "@/components/NewTicketDialog";
 import {
   Select,
   SelectContent,
@@ -50,6 +51,9 @@ export default function TicketsPage() {
   // Sheet State
   const [sheetOpen, setSheetOpen] = useState(false);
   const [selectedTicketId, setSelectedTicketId] = useState<number | null>(null);
+
+  // New Ticket Dialog State
+  const [newTicketDialogOpen, setNewTicketDialogOpen] = useState(false);
 
   // Debounce search
   const [debouncedSearch, setDebouncedSearch] = useState(search);
@@ -146,8 +150,8 @@ export default function TicketsPage() {
             Active Tickets
           </h1>
           <div className="flex items-center gap-4">
-            <Button asChild>
-              <Link href="/tickets/new">+ New Ticket</Link>
+            <Button onClick={() => setNewTicketDialogOpen(true)}>
+              + New Ticket
             </Button>
             <Button asChild variant="outline">
               <Link href="/">Home</Link>
@@ -374,6 +378,12 @@ export default function TicketsPage() {
         open={sheetOpen}
         onOpenChange={setSheetOpen}
         onTicketUpdated={handleTicketUpdated}
+      />
+
+      <NewTicketDialog
+        open={newTicketDialogOpen}
+        onOpenChange={setNewTicketDialogOpen}
+        onTicketCreated={handleTicketUpdated}
       />
     </div>
   );
