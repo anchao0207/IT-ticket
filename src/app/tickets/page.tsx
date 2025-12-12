@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   InputGroup,
@@ -31,6 +30,11 @@ interface Ticket {
   person: string;
 }
 
+interface Admin {
+  id: number;
+  name: string;
+}
+
 export default function TicketsPage() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,9 +44,10 @@ export default function TicketsPage() {
 
   // Filter States
   const [user, setUser] = useState<{ id: number } | null>(null);
+  const [admins, setAdmins] = useState<Admin[]>([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
-  const [assigneeFilter, setAssigneeFilter] = useState("All"); // 'All', 'Me', 'Unassigned'
+  const [assigneeFilter, setAssigneeFilter] = useState("All"); // 'All', 'Me', or admin ID as string
 
   // Sort State
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
@@ -72,6 +77,14 @@ export default function TicketsPage() {
       .then((data) => {
         if (data.user) setUser(data.user);
       });
+
+    // Fetch Admins for filter dropdown
+    fetch("/api/admins")
+      .then((res) => res.json())
+      .then((data) => {
+        setAdmins(data);
+      })
+      .catch((err) => console.error("Failed to fetch admins", err));
   }, []);
 
   const fetchTickets = (page: number) => {
@@ -88,8 +101,9 @@ export default function TicketsPage() {
 
     if (assigneeFilter === "Me" && user) {
       params.append("adminId", user.id.toString());
-    } else if (assigneeFilter === "Unassigned") {
-      params.append("adminId", "null");
+    } else if (assigneeFilter !== "All") {
+      // assigneeFilter is a specific admin ID
+      params.append("adminId", assigneeFilter);
     }
 
     fetch(`/api/tickets?${params.toString()}`)
@@ -196,6 +210,13 @@ export default function TicketsPage() {
               <SelectContent>
                 <SelectItem value="All">All Assignees</SelectItem>
                 {user && <SelectItem value="Me">My Tickets</SelectItem>}
+                {admins
+                  .filter((admin) => admin.id !== user?.id)
+                  .map((admin) => (
+                    <SelectItem key={admin.id} value={admin.id.toString()}>
+                      {admin.name}
+                    </SelectItem>
+                  ))}
               </SelectContent>
             </Select>
           </div>

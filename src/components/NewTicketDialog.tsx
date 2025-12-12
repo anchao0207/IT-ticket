@@ -158,7 +158,6 @@ export function NewTicketDialog({
           </div>
 
           <div className="grid gap-4 md:grid-cols-4">
-            {/* <div className="grid gap-4 md:grid-cols-2"> */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Admin (Taking Call)
@@ -193,7 +192,6 @@ export function NewTicketDialog({
                 </SelectContent>
               </Select>
             </div>
-            {/* </div> */}
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Start Time
