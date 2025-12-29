@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
 interface Admin {
   id: number;
@@ -240,11 +241,53 @@ export default function TimeLogsPage() {
     );
   };
 
+  const handleTimeBlur = (
+    dateStr: string,
+    field: keyof TimeLog,
+    value: string
+  ) => {
+    if (!value) return;
+
+    // Remove non-digit characters to check raw input
+    const clean = value.replace(/\D/g, "");
+    let formatted = value;
+
+    // Logic to auto-format "930" -> "09:30", "9" -> "09:00", etc.
+    if (clean.length > 0 && clean.length <= 4) {
+      const num = parseInt(clean, 10);
+      if (!isNaN(num)) {
+        if (clean.length <= 2) {
+          // e.g. "9" -> "09:00", "14" -> "14:00"
+          formatted = `${clean.padStart(2, "0")}:00`;
+        } else if (clean.length === 3) {
+          // e.g. "930" -> "09:30"
+          const h = clean.slice(0, 1);
+          const m = clean.slice(1);
+          formatted = `${h.padStart(2, "0")}:${m}`;
+        } else if (clean.length === 4) {
+          // e.g. "1430" -> "14:30"
+          const h = clean.slice(0, 2);
+          const m = clean.slice(2);
+          formatted = `${h}:${m}`;
+        }
+      }
+    }
+
+    // Basic validation to ensure it looks like time, otherwise revert or keep?
+    // For now, if we formatted it, update it.
+    if (formatted !== value) {
+      handleInputChange(dateStr, field, formatted);
+    }
+  };
+
   const calculateDailyTotal = (log: TimeLog) => {
     if (!log.timeIn || !log.timeOut) return 0;
 
     const parseTime = (t: string) => {
+      // Robust parsing: if it doesn't look like HH:MM, return 0 or try to parse
+      if (!t || !t.includes(":")) return 0;
       const [h, m] = t.split(":").map(Number);
+      if (isNaN(h) || isNaN(m)) return 0;
       return h * 60 + m; // minutes
     };
 
@@ -263,6 +306,11 @@ export default function TimeLogsPage() {
 
   const totalPeriodHours = editableLogs.reduce(
     (acc, log) => acc + calculateDailyTotal(log),
+    0
+  );
+
+  const totalPeriodMileage = editableLogs.reduce(
+    (acc, log) => acc + (parseFloat(log.mileage || "0") || 0),
     0
   );
 
@@ -475,20 +523,25 @@ export default function TimeLogsPage() {
                   >
                     <TableCell className="font-medium">{displayDate}</TableCell>
                     <TableCell>
-                      <input
-                        type="time"
-                        className="w-full rounded border p-1 disabled:bg-transparent disabled:border-transparent dark:bg-gray-700"
+                      <Input
+                        type="text"
+                        className="h-8 w-full min-w-[80px] disabled:opacity-100 disabled:cursor-default disabled:border-transparent"
+                        placeholder="HH:MM"
                         value={log.timeIn || ""}
                         onChange={(e) =>
                           handleInputChange(log.date, "timeIn", e.target.value)
+                        }
+                        onBlur={(e) =>
+                          handleTimeBlur(log.date, "timeIn", e.target.value)
                         }
                         disabled={!isEditing}
                       />
                     </TableCell>
                     <TableCell>
-                      <input
-                        type="time"
-                        className="w-full rounded border p-1 disabled:bg-transparent disabled:border-transparent dark:bg-gray-700"
+                      <Input
+                        type="text"
+                        className="h-8 w-full min-w-[80px] disabled:opacity-100 disabled:cursor-default disabled:border-transparent"
+                        placeholder="HH:MM"
                         value={log.lunchStart || ""}
                         onChange={(e) =>
                           handleInputChange(
@@ -497,13 +550,17 @@ export default function TimeLogsPage() {
                             e.target.value
                           )
                         }
+                        onBlur={(e) =>
+                          handleTimeBlur(log.date, "lunchStart", e.target.value)
+                        }
                         disabled={!isEditing}
                       />
                     </TableCell>
                     <TableCell>
-                      <input
-                        type="time"
-                        className="w-full rounded border p-1 disabled:bg-transparent disabled:border-transparent dark:bg-gray-700"
+                      <Input
+                        type="text"
+                        className="h-8 w-full min-w-[80px] disabled:opacity-100 disabled:cursor-default disabled:border-transparent"
+                        placeholder="HH:MM"
                         value={log.lunchEnd || ""}
                         onChange={(e) =>
                           handleInputChange(
@@ -512,25 +569,32 @@ export default function TimeLogsPage() {
                             e.target.value
                           )
                         }
-                        disabled={!isEditing}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <input
-                        type="time"
-                        className="w-full rounded border p-1 disabled:bg-transparent disabled:border-transparent dark:bg-gray-700"
-                        value={log.timeOut || ""}
-                        onChange={(e) =>
-                          handleInputChange(log.date, "timeOut", e.target.value)
+                        onBlur={(e) =>
+                          handleTimeBlur(log.date, "lunchEnd", e.target.value)
                         }
                         disabled={!isEditing}
                       />
                     </TableCell>
                     <TableCell>
-                      <input
+                      <Input
+                        type="text"
+                        className="h-8 w-full min-w-[80px] disabled:opacity-100 disabled:cursor-default disabled:border-transparent"
+                        placeholder="HH:MM"
+                        value={log.timeOut || ""}
+                        onChange={(e) =>
+                          handleInputChange(log.date, "timeOut", e.target.value)
+                        }
+                        onBlur={(e) =>
+                          handleTimeBlur(log.date, "timeOut", e.target.value)
+                        }
+                        disabled={!isEditing}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Input
                         type="number"
                         step="0.1"
-                        className="w-full rounded border p-1 disabled:bg-transparent disabled:border-transparent dark:bg-gray-700"
+                        className="h-8 w-full min-w-[80px] disabled:opacity-100 disabled:cursor-default disabled:border-transparent"
                         value={log.mileage || ""}
                         onChange={(e) =>
                           handleInputChange(log.date, "mileage", e.target.value)
@@ -547,8 +611,11 @@ export default function TimeLogsPage() {
             </TableBody>
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={6} className="text-right font-bold">
+                <TableCell colSpan={5} className="text-right font-bold">
                   Period Total:
+                </TableCell>
+                <TableCell className="font-bold text-blue-600 dark:text-blue-400">
+                  {totalPeriodMileage.toFixed(1)}
                 </TableCell>
                 <TableCell className="font-bold text-blue-600 dark:text-blue-400">
                   {totalPeriodHours.toFixed(2)} Hrs
