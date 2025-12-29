@@ -1,11 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
-  engineType = "library"
+  provider        = "prisma-client"
+  output          = "./generated"
+  engineType      = "client"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 // Ticket Relationship: One Admin has many Tickets
