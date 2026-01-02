@@ -9,6 +9,7 @@ datasource db {
 }
 
 // Ticket Relationship: One Admin has many Tickets
+// Ticket Relationship: One Admin has many Tickets
 model ticket {
   id          Int       @id @default(autoincrement())
   date        DateTime  @default(now())
@@ -24,8 +25,39 @@ model ticket {
   status      String    @default("Unassigned")
   
   // Relations
-  adminId Int?
-  admin   admin? @relation(fields: [adminId], references: [id])
+  adminId     Int?
+  admin       admin?    @relation(fields: [adminId], references: [id])
+
+  // New Relations
+  clientId    Int?
+  client      client?   @relation(fields: [clientId], references: [id])
+  assetSerial String?
+  asset       asset?    @relation(fields: [assetSerial], references: [serialNumber])
+}
+
+model client {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  contactInfo String?
+  phone       String?
+  address     String?
+  
+  assets      asset[]
+  tickets     ticket[]
+}
+
+model asset {
+  serialNumber String    @id
+  name         String
+  type         String
+  description  String?
+  status       String    @default("In Storage")
+  purchaseDate DateTime?
+  
+  // Relations
+  clientId     Int?
+  client       client?   @relation(fields: [clientId], references: [id])
+  tickets      ticket[]
 }
 
 model timelog {

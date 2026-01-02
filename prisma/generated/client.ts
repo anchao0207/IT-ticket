@@ -45,6 +45,16 @@ export { Prisma }
  */
 export type ticket = Prisma.ticketModel
 /**
+ * Model client
+ * 
+ */
+export type client = Prisma.clientModel
+/**
+ * Model asset
+ * 
+ */
+export type asset = Prisma.assetModel
+/**
  * Model timelog
  * 
  */

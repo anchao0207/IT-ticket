@@ -9,6 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/ticket'
+export type * from './models/client'
+export type * from './models/asset'
 export type * from './models/timelog'
 export type * from './models/admin'
 export type * from './commonInputTypes'

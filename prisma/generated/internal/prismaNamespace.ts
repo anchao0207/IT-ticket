@@ -385,6 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   ticket: 'ticket',
+  client: 'client',
+  asset: 'asset',
   timelog: 'timelog',
   admin: 'admin'
 } as const
@@ -402,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "ticket" | "timelog" | "admin"
+    modelProps: "ticket" | "client" | "asset" | "timelog" | "admin"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -477,6 +479,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ticketCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TicketCountAggregateOutputType> | number
+        }
+      }
+    }
+    client: {
+      payload: Prisma.$clientPayload<ExtArgs>
+      fields: Prisma.clientFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.clientFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.clientFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>
+        }
+        findFirst: {
+          args: Prisma.clientFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.clientFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>
+        }
+        findMany: {
+          args: Prisma.clientFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>[]
+        }
+        create: {
+          args: Prisma.clientCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>
+        }
+        createMany: {
+          args: Prisma.clientCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.clientCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>[]
+        }
+        delete: {
+          args: Prisma.clientDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>
+        }
+        update: {
+          args: Prisma.clientUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>
+        }
+        deleteMany: {
+          args: Prisma.clientDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.clientUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.clientUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>[]
+        }
+        upsert: {
+          args: Prisma.clientUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$clientPayload>
+        }
+        aggregate: {
+          args: Prisma.ClientAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClient>
+        }
+        groupBy: {
+          args: Prisma.clientGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClientGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.clientCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClientCountAggregateOutputType> | number
+        }
+      }
+    }
+    asset: {
+      payload: Prisma.$assetPayload<ExtArgs>
+      fields: Prisma.assetFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.assetFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.assetFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>
+        }
+        findFirst: {
+          args: Prisma.assetFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.assetFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>
+        }
+        findMany: {
+          args: Prisma.assetFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>[]
+        }
+        create: {
+          args: Prisma.assetCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>
+        }
+        createMany: {
+          args: Prisma.assetCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.assetCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>[]
+        }
+        delete: {
+          args: Prisma.assetDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>
+        }
+        update: {
+          args: Prisma.assetUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>
+        }
+        deleteMany: {
+          args: Prisma.assetDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.assetUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.assetUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>[]
+        }
+        upsert: {
+          args: Prisma.assetUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$assetPayload>
+        }
+        aggregate: {
+          args: Prisma.AssetAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAsset>
+        }
+        groupBy: {
+          args: Prisma.assetGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AssetGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.assetCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AssetCountAggregateOutputType> | number
         }
       }
     }
@@ -680,10 +830,36 @@ export const TicketScalarFieldEnum = {
   timeEnd: 'timeEnd',
   totalTime: 'totalTime',
   status: 'status',
-  adminId: 'adminId'
+  adminId: 'adminId',
+  clientId: 'clientId',
+  assetSerial: 'assetSerial'
 } as const
 
 export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
+
+
+export const ClientScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  contactInfo: 'contactInfo',
+  phone: 'phone',
+  address: 'address'
+} as const
+
+export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
+
+
+export const AssetScalarFieldEnum = {
+  serialNumber: 'serialNumber',
+  name: 'name',
+  type: 'type',
+  description: 'description',
+  status: 'status',
+  purchaseDate: 'purchaseDate',
+  clientId: 'clientId'
+} as const
+
+export type AssetScalarFieldEnum = (typeof AssetScalarFieldEnum)[keyof typeof AssetScalarFieldEnum]
 
 
 export const TimelogScalarFieldEnum = {
@@ -891,6 +1067,8 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   ticket?: Prisma.ticketOmit
+  client?: Prisma.clientOmit
+  asset?: Prisma.assetOmit
   timelog?: Prisma.timelogOmit
   admin?: Prisma.adminOmit
 }

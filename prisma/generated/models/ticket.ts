@@ -30,12 +30,14 @@ export type TicketAvgAggregateOutputType = {
   id: number | null
   totalTime: number | null
   adminId: number | null
+  clientId: number | null
 }
 
 export type TicketSumAggregateOutputType = {
   id: number | null
   totalTime: number | null
   adminId: number | null
+  clientId: number | null
 }
 
 export type TicketMinAggregateOutputType = {
@@ -52,6 +54,8 @@ export type TicketMinAggregateOutputType = {
   totalTime: number | null
   status: string | null
   adminId: number | null
+  clientId: number | null
+  assetSerial: string | null
 }
 
 export type TicketMaxAggregateOutputType = {
@@ -68,6 +72,8 @@ export type TicketMaxAggregateOutputType = {
   totalTime: number | null
   status: string | null
   adminId: number | null
+  clientId: number | null
+  assetSerial: string | null
 }
 
 export type TicketCountAggregateOutputType = {
@@ -84,6 +90,8 @@ export type TicketCountAggregateOutputType = {
   totalTime: number
   status: number
   adminId: number
+  clientId: number
+  assetSerial: number
   _all: number
 }
 
@@ -92,12 +100,14 @@ export type TicketAvgAggregateInputType = {
   id?: true
   totalTime?: true
   adminId?: true
+  clientId?: true
 }
 
 export type TicketSumAggregateInputType = {
   id?: true
   totalTime?: true
   adminId?: true
+  clientId?: true
 }
 
 export type TicketMinAggregateInputType = {
@@ -114,6 +124,8 @@ export type TicketMinAggregateInputType = {
   totalTime?: true
   status?: true
   adminId?: true
+  clientId?: true
+  assetSerial?: true
 }
 
 export type TicketMaxAggregateInputType = {
@@ -130,6 +142,8 @@ export type TicketMaxAggregateInputType = {
   totalTime?: true
   status?: true
   adminId?: true
+  clientId?: true
+  assetSerial?: true
 }
 
 export type TicketCountAggregateInputType = {
@@ -146,6 +160,8 @@ export type TicketCountAggregateInputType = {
   totalTime?: true
   status?: true
   adminId?: true
+  clientId?: true
+  assetSerial?: true
   _all?: true
 }
 
@@ -249,6 +265,8 @@ export type TicketGroupByOutputType = {
   totalTime: number | null
   status: string
   adminId: number | null
+  clientId: number | null
+  assetSerial: string | null
   _count: TicketCountAggregateOutputType | null
   _avg: TicketAvgAggregateOutputType | null
   _sum: TicketSumAggregateOutputType | null
@@ -288,7 +306,11 @@ export type ticketWhereInput = {
   totalTime?: Prisma.FloatNullableFilter<"ticket"> | number | null
   status?: Prisma.StringFilter<"ticket"> | string
   adminId?: Prisma.IntNullableFilter<"ticket"> | number | null
+  clientId?: Prisma.IntNullableFilter<"ticket"> | number | null
+  assetSerial?: Prisma.StringNullableFilter<"ticket"> | string | null
   admin?: Prisma.XOR<Prisma.AdminNullableScalarRelationFilter, Prisma.adminWhereInput> | null
+  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.clientWhereInput> | null
+  asset?: Prisma.XOR<Prisma.AssetNullableScalarRelationFilter, Prisma.assetWhereInput> | null
 }
 
 export type ticketOrderByWithRelationInput = {
@@ -305,7 +327,11 @@ export type ticketOrderByWithRelationInput = {
   totalTime?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   adminId?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientId?: Prisma.SortOrderInput | Prisma.SortOrder
+  assetSerial?: Prisma.SortOrderInput | Prisma.SortOrder
   admin?: Prisma.adminOrderByWithRelationInput
+  client?: Prisma.clientOrderByWithRelationInput
+  asset?: Prisma.assetOrderByWithRelationInput
 }
 
 export type ticketWhereUniqueInput = Prisma.AtLeast<{
@@ -325,7 +351,11 @@ export type ticketWhereUniqueInput = Prisma.AtLeast<{
   totalTime?: Prisma.FloatNullableFilter<"ticket"> | number | null
   status?: Prisma.StringFilter<"ticket"> | string
   adminId?: Prisma.IntNullableFilter<"ticket"> | number | null
+  clientId?: Prisma.IntNullableFilter<"ticket"> | number | null
+  assetSerial?: Prisma.StringNullableFilter<"ticket"> | string | null
   admin?: Prisma.XOR<Prisma.AdminNullableScalarRelationFilter, Prisma.adminWhereInput> | null
+  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.clientWhereInput> | null
+  asset?: Prisma.XOR<Prisma.AssetNullableScalarRelationFilter, Prisma.assetWhereInput> | null
 }, "id">
 
 export type ticketOrderByWithAggregationInput = {
@@ -342,6 +372,8 @@ export type ticketOrderByWithAggregationInput = {
   totalTime?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   adminId?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientId?: Prisma.SortOrderInput | Prisma.SortOrder
+  assetSerial?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ticketCountOrderByAggregateInput
   _avg?: Prisma.ticketAvgOrderByAggregateInput
   _max?: Prisma.ticketMaxOrderByAggregateInput
@@ -366,6 +398,8 @@ export type ticketScalarWhereWithAggregatesInput = {
   totalTime?: Prisma.FloatNullableWithAggregatesFilter<"ticket"> | number | null
   status?: Prisma.StringWithAggregatesFilter<"ticket"> | string
   adminId?: Prisma.IntNullableWithAggregatesFilter<"ticket"> | number | null
+  clientId?: Prisma.IntNullableWithAggregatesFilter<"ticket"> | number | null
+  assetSerial?: Prisma.StringNullableWithAggregatesFilter<"ticket"> | string | null
 }
 
 export type ticketCreateInput = {
@@ -381,6 +415,8 @@ export type ticketCreateInput = {
   totalTime?: number | null
   status?: string
   admin?: Prisma.adminCreateNestedOneWithoutTicketsInput
+  client?: Prisma.clientCreateNestedOneWithoutTicketsInput
+  asset?: Prisma.assetCreateNestedOneWithoutTicketsInput
 }
 
 export type ticketUncheckedCreateInput = {
@@ -397,6 +433,8 @@ export type ticketUncheckedCreateInput = {
   totalTime?: number | null
   status?: string
   adminId?: number | null
+  clientId?: number | null
+  assetSerial?: string | null
 }
 
 export type ticketUpdateInput = {
@@ -412,6 +450,8 @@ export type ticketUpdateInput = {
   totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   admin?: Prisma.adminUpdateOneWithoutTicketsNestedInput
+  client?: Prisma.clientUpdateOneWithoutTicketsNestedInput
+  asset?: Prisma.assetUpdateOneWithoutTicketsNestedInput
 }
 
 export type ticketUncheckedUpdateInput = {
@@ -428,6 +468,8 @@ export type ticketUncheckedUpdateInput = {
   totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   adminId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clientId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetSerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ticketCreateManyInput = {
@@ -444,6 +486,8 @@ export type ticketCreateManyInput = {
   totalTime?: number | null
   status?: string
   adminId?: number | null
+  clientId?: number | null
+  assetSerial?: string | null
 }
 
 export type ticketUpdateManyMutationInput = {
@@ -474,6 +518,8 @@ export type ticketUncheckedUpdateManyInput = {
   totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   adminId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clientId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetSerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ticketCountOrderByAggregateInput = {
@@ -490,12 +536,15 @@ export type ticketCountOrderByAggregateInput = {
   totalTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
+  assetSerial?: Prisma.SortOrder
 }
 
 export type ticketAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   totalTime?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
 }
 
 export type ticketMaxOrderByAggregateInput = {
@@ -512,6 +561,8 @@ export type ticketMaxOrderByAggregateInput = {
   totalTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
+  assetSerial?: Prisma.SortOrder
 }
 
 export type ticketMinOrderByAggregateInput = {
@@ -528,12 +579,15 @@ export type ticketMinOrderByAggregateInput = {
   totalTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
+  assetSerial?: Prisma.SortOrder
 }
 
 export type ticketSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   totalTime?: Prisma.SortOrder
   adminId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
 }
 
 export type TicketListRelationFilter = {
@@ -586,6 +640,90 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type ticketCreateNestedManyWithoutClientInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutClientInput, Prisma.ticketUncheckedCreateWithoutClientInput> | Prisma.ticketCreateWithoutClientInput[] | Prisma.ticketUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutClientInput | Prisma.ticketCreateOrConnectWithoutClientInput[]
+  createMany?: Prisma.ticketCreateManyClientInputEnvelope
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+}
+
+export type ticketUncheckedCreateNestedManyWithoutClientInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutClientInput, Prisma.ticketUncheckedCreateWithoutClientInput> | Prisma.ticketCreateWithoutClientInput[] | Prisma.ticketUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutClientInput | Prisma.ticketCreateOrConnectWithoutClientInput[]
+  createMany?: Prisma.ticketCreateManyClientInputEnvelope
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+}
+
+export type ticketUpdateManyWithoutClientNestedInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutClientInput, Prisma.ticketUncheckedCreateWithoutClientInput> | Prisma.ticketCreateWithoutClientInput[] | Prisma.ticketUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutClientInput | Prisma.ticketCreateOrConnectWithoutClientInput[]
+  upsert?: Prisma.ticketUpsertWithWhereUniqueWithoutClientInput | Prisma.ticketUpsertWithWhereUniqueWithoutClientInput[]
+  createMany?: Prisma.ticketCreateManyClientInputEnvelope
+  set?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  disconnect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  delete?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  update?: Prisma.ticketUpdateWithWhereUniqueWithoutClientInput | Prisma.ticketUpdateWithWhereUniqueWithoutClientInput[]
+  updateMany?: Prisma.ticketUpdateManyWithWhereWithoutClientInput | Prisma.ticketUpdateManyWithWhereWithoutClientInput[]
+  deleteMany?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
+}
+
+export type ticketUncheckedUpdateManyWithoutClientNestedInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutClientInput, Prisma.ticketUncheckedCreateWithoutClientInput> | Prisma.ticketCreateWithoutClientInput[] | Prisma.ticketUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutClientInput | Prisma.ticketCreateOrConnectWithoutClientInput[]
+  upsert?: Prisma.ticketUpsertWithWhereUniqueWithoutClientInput | Prisma.ticketUpsertWithWhereUniqueWithoutClientInput[]
+  createMany?: Prisma.ticketCreateManyClientInputEnvelope
+  set?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  disconnect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  delete?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  update?: Prisma.ticketUpdateWithWhereUniqueWithoutClientInput | Prisma.ticketUpdateWithWhereUniqueWithoutClientInput[]
+  updateMany?: Prisma.ticketUpdateManyWithWhereWithoutClientInput | Prisma.ticketUpdateManyWithWhereWithoutClientInput[]
+  deleteMany?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
+}
+
+export type ticketCreateNestedManyWithoutAssetInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutAssetInput, Prisma.ticketUncheckedCreateWithoutAssetInput> | Prisma.ticketCreateWithoutAssetInput[] | Prisma.ticketUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutAssetInput | Prisma.ticketCreateOrConnectWithoutAssetInput[]
+  createMany?: Prisma.ticketCreateManyAssetInputEnvelope
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+}
+
+export type ticketUncheckedCreateNestedManyWithoutAssetInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutAssetInput, Prisma.ticketUncheckedCreateWithoutAssetInput> | Prisma.ticketCreateWithoutAssetInput[] | Prisma.ticketUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutAssetInput | Prisma.ticketCreateOrConnectWithoutAssetInput[]
+  createMany?: Prisma.ticketCreateManyAssetInputEnvelope
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+}
+
+export type ticketUpdateManyWithoutAssetNestedInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutAssetInput, Prisma.ticketUncheckedCreateWithoutAssetInput> | Prisma.ticketCreateWithoutAssetInput[] | Prisma.ticketUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutAssetInput | Prisma.ticketCreateOrConnectWithoutAssetInput[]
+  upsert?: Prisma.ticketUpsertWithWhereUniqueWithoutAssetInput | Prisma.ticketUpsertWithWhereUniqueWithoutAssetInput[]
+  createMany?: Prisma.ticketCreateManyAssetInputEnvelope
+  set?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  disconnect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  delete?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  update?: Prisma.ticketUpdateWithWhereUniqueWithoutAssetInput | Prisma.ticketUpdateWithWhereUniqueWithoutAssetInput[]
+  updateMany?: Prisma.ticketUpdateManyWithWhereWithoutAssetInput | Prisma.ticketUpdateManyWithWhereWithoutAssetInput[]
+  deleteMany?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
+}
+
+export type ticketUncheckedUpdateManyWithoutAssetNestedInput = {
+  create?: Prisma.XOR<Prisma.ticketCreateWithoutAssetInput, Prisma.ticketUncheckedCreateWithoutAssetInput> | Prisma.ticketCreateWithoutAssetInput[] | Prisma.ticketUncheckedCreateWithoutAssetInput[]
+  connectOrCreate?: Prisma.ticketCreateOrConnectWithoutAssetInput | Prisma.ticketCreateOrConnectWithoutAssetInput[]
+  upsert?: Prisma.ticketUpsertWithWhereUniqueWithoutAssetInput | Prisma.ticketUpsertWithWhereUniqueWithoutAssetInput[]
+  createMany?: Prisma.ticketCreateManyAssetInputEnvelope
+  set?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  disconnect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  delete?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  connect?: Prisma.ticketWhereUniqueInput | Prisma.ticketWhereUniqueInput[]
+  update?: Prisma.ticketUpdateWithWhereUniqueWithoutAssetInput | Prisma.ticketUpdateWithWhereUniqueWithoutAssetInput[]
+  updateMany?: Prisma.ticketUpdateManyWithWhereWithoutAssetInput | Prisma.ticketUpdateManyWithWhereWithoutAssetInput[]
+  deleteMany?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
+}
+
 export type ticketCreateNestedManyWithoutAdminInput = {
   create?: Prisma.XOR<Prisma.ticketCreateWithoutAdminInput, Prisma.ticketUncheckedCreateWithoutAdminInput> | Prisma.ticketCreateWithoutAdminInput[] | Prisma.ticketUncheckedCreateWithoutAdminInput[]
   connectOrCreate?: Prisma.ticketCreateOrConnectWithoutAdminInput | Prisma.ticketCreateOrConnectWithoutAdminInput[]
@@ -628,6 +766,145 @@ export type ticketUncheckedUpdateManyWithoutAdminNestedInput = {
   deleteMany?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
 }
 
+export type ticketCreateWithoutClientInput = {
+  date?: Date | string
+  startedTime: Date | string
+  company: string
+  location: string
+  person: string
+  issue: string
+  resolution?: string | null
+  comments?: string | null
+  timeEnd?: Date | string | null
+  totalTime?: number | null
+  status?: string
+  admin?: Prisma.adminCreateNestedOneWithoutTicketsInput
+  asset?: Prisma.assetCreateNestedOneWithoutTicketsInput
+}
+
+export type ticketUncheckedCreateWithoutClientInput = {
+  id?: number
+  date?: Date | string
+  startedTime: Date | string
+  company: string
+  location: string
+  person: string
+  issue: string
+  resolution?: string | null
+  comments?: string | null
+  timeEnd?: Date | string | null
+  totalTime?: number | null
+  status?: string
+  adminId?: number | null
+  assetSerial?: string | null
+}
+
+export type ticketCreateOrConnectWithoutClientInput = {
+  where: Prisma.ticketWhereUniqueInput
+  create: Prisma.XOR<Prisma.ticketCreateWithoutClientInput, Prisma.ticketUncheckedCreateWithoutClientInput>
+}
+
+export type ticketCreateManyClientInputEnvelope = {
+  data: Prisma.ticketCreateManyClientInput | Prisma.ticketCreateManyClientInput[]
+  skipDuplicates?: boolean
+}
+
+export type ticketUpsertWithWhereUniqueWithoutClientInput = {
+  where: Prisma.ticketWhereUniqueInput
+  update: Prisma.XOR<Prisma.ticketUpdateWithoutClientInput, Prisma.ticketUncheckedUpdateWithoutClientInput>
+  create: Prisma.XOR<Prisma.ticketCreateWithoutClientInput, Prisma.ticketUncheckedCreateWithoutClientInput>
+}
+
+export type ticketUpdateWithWhereUniqueWithoutClientInput = {
+  where: Prisma.ticketWhereUniqueInput
+  data: Prisma.XOR<Prisma.ticketUpdateWithoutClientInput, Prisma.ticketUncheckedUpdateWithoutClientInput>
+}
+
+export type ticketUpdateManyWithWhereWithoutClientInput = {
+  where: Prisma.ticketScalarWhereInput
+  data: Prisma.XOR<Prisma.ticketUpdateManyMutationInput, Prisma.ticketUncheckedUpdateManyWithoutClientInput>
+}
+
+export type ticketScalarWhereInput = {
+  AND?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
+  OR?: Prisma.ticketScalarWhereInput[]
+  NOT?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
+  id?: Prisma.IntFilter<"ticket"> | number
+  date?: Prisma.DateTimeFilter<"ticket"> | Date | string
+  startedTime?: Prisma.DateTimeFilter<"ticket"> | Date | string
+  company?: Prisma.StringFilter<"ticket"> | string
+  location?: Prisma.StringFilter<"ticket"> | string
+  person?: Prisma.StringFilter<"ticket"> | string
+  issue?: Prisma.StringFilter<"ticket"> | string
+  resolution?: Prisma.StringNullableFilter<"ticket"> | string | null
+  comments?: Prisma.StringNullableFilter<"ticket"> | string | null
+  timeEnd?: Prisma.DateTimeNullableFilter<"ticket"> | Date | string | null
+  totalTime?: Prisma.FloatNullableFilter<"ticket"> | number | null
+  status?: Prisma.StringFilter<"ticket"> | string
+  adminId?: Prisma.IntNullableFilter<"ticket"> | number | null
+  clientId?: Prisma.IntNullableFilter<"ticket"> | number | null
+  assetSerial?: Prisma.StringNullableFilter<"ticket"> | string | null
+}
+
+export type ticketCreateWithoutAssetInput = {
+  date?: Date | string
+  startedTime: Date | string
+  company: string
+  location: string
+  person: string
+  issue: string
+  resolution?: string | null
+  comments?: string | null
+  timeEnd?: Date | string | null
+  totalTime?: number | null
+  status?: string
+  admin?: Prisma.adminCreateNestedOneWithoutTicketsInput
+  client?: Prisma.clientCreateNestedOneWithoutTicketsInput
+}
+
+export type ticketUncheckedCreateWithoutAssetInput = {
+  id?: number
+  date?: Date | string
+  startedTime: Date | string
+  company: string
+  location: string
+  person: string
+  issue: string
+  resolution?: string | null
+  comments?: string | null
+  timeEnd?: Date | string | null
+  totalTime?: number | null
+  status?: string
+  adminId?: number | null
+  clientId?: number | null
+}
+
+export type ticketCreateOrConnectWithoutAssetInput = {
+  where: Prisma.ticketWhereUniqueInput
+  create: Prisma.XOR<Prisma.ticketCreateWithoutAssetInput, Prisma.ticketUncheckedCreateWithoutAssetInput>
+}
+
+export type ticketCreateManyAssetInputEnvelope = {
+  data: Prisma.ticketCreateManyAssetInput | Prisma.ticketCreateManyAssetInput[]
+  skipDuplicates?: boolean
+}
+
+export type ticketUpsertWithWhereUniqueWithoutAssetInput = {
+  where: Prisma.ticketWhereUniqueInput
+  update: Prisma.XOR<Prisma.ticketUpdateWithoutAssetInput, Prisma.ticketUncheckedUpdateWithoutAssetInput>
+  create: Prisma.XOR<Prisma.ticketCreateWithoutAssetInput, Prisma.ticketUncheckedCreateWithoutAssetInput>
+}
+
+export type ticketUpdateWithWhereUniqueWithoutAssetInput = {
+  where: Prisma.ticketWhereUniqueInput
+  data: Prisma.XOR<Prisma.ticketUpdateWithoutAssetInput, Prisma.ticketUncheckedUpdateWithoutAssetInput>
+}
+
+export type ticketUpdateManyWithWhereWithoutAssetInput = {
+  where: Prisma.ticketScalarWhereInput
+  data: Prisma.XOR<Prisma.ticketUpdateManyMutationInput, Prisma.ticketUncheckedUpdateManyWithoutAssetInput>
+}
+
 export type ticketCreateWithoutAdminInput = {
   date?: Date | string
   startedTime: Date | string
@@ -640,6 +917,8 @@ export type ticketCreateWithoutAdminInput = {
   timeEnd?: Date | string | null
   totalTime?: number | null
   status?: string
+  client?: Prisma.clientCreateNestedOneWithoutTicketsInput
+  asset?: Prisma.assetCreateNestedOneWithoutTicketsInput
 }
 
 export type ticketUncheckedCreateWithoutAdminInput = {
@@ -655,6 +934,8 @@ export type ticketUncheckedCreateWithoutAdminInput = {
   timeEnd?: Date | string | null
   totalTime?: number | null
   status?: string
+  clientId?: number | null
+  assetSerial?: string | null
 }
 
 export type ticketCreateOrConnectWithoutAdminInput = {
@@ -683,23 +964,138 @@ export type ticketUpdateManyWithWhereWithoutAdminInput = {
   data: Prisma.XOR<Prisma.ticketUpdateManyMutationInput, Prisma.ticketUncheckedUpdateManyWithoutAdminInput>
 }
 
-export type ticketScalarWhereInput = {
-  AND?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
-  OR?: Prisma.ticketScalarWhereInput[]
-  NOT?: Prisma.ticketScalarWhereInput | Prisma.ticketScalarWhereInput[]
-  id?: Prisma.IntFilter<"ticket"> | number
-  date?: Prisma.DateTimeFilter<"ticket"> | Date | string
-  startedTime?: Prisma.DateTimeFilter<"ticket"> | Date | string
-  company?: Prisma.StringFilter<"ticket"> | string
-  location?: Prisma.StringFilter<"ticket"> | string
-  person?: Prisma.StringFilter<"ticket"> | string
-  issue?: Prisma.StringFilter<"ticket"> | string
-  resolution?: Prisma.StringNullableFilter<"ticket"> | string | null
-  comments?: Prisma.StringNullableFilter<"ticket"> | string | null
-  timeEnd?: Prisma.DateTimeNullableFilter<"ticket"> | Date | string | null
-  totalTime?: Prisma.FloatNullableFilter<"ticket"> | number | null
-  status?: Prisma.StringFilter<"ticket"> | string
-  adminId?: Prisma.IntNullableFilter<"ticket"> | number | null
+export type ticketCreateManyClientInput = {
+  id?: number
+  date?: Date | string
+  startedTime: Date | string
+  company: string
+  location: string
+  person: string
+  issue: string
+  resolution?: string | null
+  comments?: string | null
+  timeEnd?: Date | string | null
+  totalTime?: number | null
+  status?: string
+  adminId?: number | null
+  assetSerial?: string | null
+}
+
+export type ticketUpdateWithoutClientInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  person?: Prisma.StringFieldUpdateOperationsInput | string
+  issue?: Prisma.StringFieldUpdateOperationsInput | string
+  resolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  admin?: Prisma.adminUpdateOneWithoutTicketsNestedInput
+  asset?: Prisma.assetUpdateOneWithoutTicketsNestedInput
+}
+
+export type ticketUncheckedUpdateWithoutClientInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  person?: Prisma.StringFieldUpdateOperationsInput | string
+  issue?: Prisma.StringFieldUpdateOperationsInput | string
+  resolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  adminId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetSerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ticketUncheckedUpdateManyWithoutClientInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  person?: Prisma.StringFieldUpdateOperationsInput | string
+  issue?: Prisma.StringFieldUpdateOperationsInput | string
+  resolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  adminId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetSerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ticketCreateManyAssetInput = {
+  id?: number
+  date?: Date | string
+  startedTime: Date | string
+  company: string
+  location: string
+  person: string
+  issue: string
+  resolution?: string | null
+  comments?: string | null
+  timeEnd?: Date | string | null
+  totalTime?: number | null
+  status?: string
+  adminId?: number | null
+  clientId?: number | null
+}
+
+export type ticketUpdateWithoutAssetInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  person?: Prisma.StringFieldUpdateOperationsInput | string
+  issue?: Prisma.StringFieldUpdateOperationsInput | string
+  resolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  admin?: Prisma.adminUpdateOneWithoutTicketsNestedInput
+  client?: Prisma.clientUpdateOneWithoutTicketsNestedInput
+}
+
+export type ticketUncheckedUpdateWithoutAssetInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  person?: Prisma.StringFieldUpdateOperationsInput | string
+  issue?: Prisma.StringFieldUpdateOperationsInput | string
+  resolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  adminId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clientId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type ticketUncheckedUpdateManyWithoutAssetInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  startedTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  person?: Prisma.StringFieldUpdateOperationsInput | string
+  issue?: Prisma.StringFieldUpdateOperationsInput | string
+  resolution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  adminId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  clientId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ticketCreateManyAdminInput = {
@@ -715,6 +1111,8 @@ export type ticketCreateManyAdminInput = {
   timeEnd?: Date | string | null
   totalTime?: number | null
   status?: string
+  clientId?: number | null
+  assetSerial?: string | null
 }
 
 export type ticketUpdateWithoutAdminInput = {
@@ -729,6 +1127,8 @@ export type ticketUpdateWithoutAdminInput = {
   timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  client?: Prisma.clientUpdateOneWithoutTicketsNestedInput
+  asset?: Prisma.assetUpdateOneWithoutTicketsNestedInput
 }
 
 export type ticketUncheckedUpdateWithoutAdminInput = {
@@ -744,6 +1144,8 @@ export type ticketUncheckedUpdateWithoutAdminInput = {
   timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetSerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ticketUncheckedUpdateManyWithoutAdminInput = {
@@ -759,6 +1161,8 @@ export type ticketUncheckedUpdateManyWithoutAdminInput = {
   timeEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   totalTime?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetSerial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -777,7 +1181,11 @@ export type ticketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   totalTime?: boolean
   status?: boolean
   adminId?: boolean
+  clientId?: boolean
+  assetSerial?: boolean
   admin?: boolean | Prisma.ticket$adminArgs<ExtArgs>
+  client?: boolean | Prisma.ticket$clientArgs<ExtArgs>
+  asset?: boolean | Prisma.ticket$assetArgs<ExtArgs>
 }, ExtArgs["result"]["ticket"]>
 
 export type ticketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -794,7 +1202,11 @@ export type ticketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   totalTime?: boolean
   status?: boolean
   adminId?: boolean
+  clientId?: boolean
+  assetSerial?: boolean
   admin?: boolean | Prisma.ticket$adminArgs<ExtArgs>
+  client?: boolean | Prisma.ticket$clientArgs<ExtArgs>
+  asset?: boolean | Prisma.ticket$assetArgs<ExtArgs>
 }, ExtArgs["result"]["ticket"]>
 
 export type ticketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -811,7 +1223,11 @@ export type ticketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   totalTime?: boolean
   status?: boolean
   adminId?: boolean
+  clientId?: boolean
+  assetSerial?: boolean
   admin?: boolean | Prisma.ticket$adminArgs<ExtArgs>
+  client?: boolean | Prisma.ticket$clientArgs<ExtArgs>
+  asset?: boolean | Prisma.ticket$assetArgs<ExtArgs>
 }, ExtArgs["result"]["ticket"]>
 
 export type ticketSelectScalar = {
@@ -828,23 +1244,33 @@ export type ticketSelectScalar = {
   totalTime?: boolean
   status?: boolean
   adminId?: boolean
+  clientId?: boolean
+  assetSerial?: boolean
 }
 
-export type ticketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "startedTime" | "company" | "location" | "person" | "issue" | "resolution" | "comments" | "timeEnd" | "totalTime" | "status" | "adminId", ExtArgs["result"]["ticket"]>
+export type ticketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "startedTime" | "company" | "location" | "person" | "issue" | "resolution" | "comments" | "timeEnd" | "totalTime" | "status" | "adminId" | "clientId" | "assetSerial", ExtArgs["result"]["ticket"]>
 export type ticketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   admin?: boolean | Prisma.ticket$adminArgs<ExtArgs>
+  client?: boolean | Prisma.ticket$clientArgs<ExtArgs>
+  asset?: boolean | Prisma.ticket$assetArgs<ExtArgs>
 }
 export type ticketIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   admin?: boolean | Prisma.ticket$adminArgs<ExtArgs>
+  client?: boolean | Prisma.ticket$clientArgs<ExtArgs>
+  asset?: boolean | Prisma.ticket$assetArgs<ExtArgs>
 }
 export type ticketIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   admin?: boolean | Prisma.ticket$adminArgs<ExtArgs>
+  client?: boolean | Prisma.ticket$clientArgs<ExtArgs>
+  asset?: boolean | Prisma.ticket$assetArgs<ExtArgs>
 }
 
 export type $ticketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ticket"
   objects: {
     admin: Prisma.$adminPayload<ExtArgs> | null
+    client: Prisma.$clientPayload<ExtArgs> | null
+    asset: Prisma.$assetPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -860,6 +1286,8 @@ export type $ticketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     totalTime: number | null
     status: string
     adminId: number | null
+    clientId: number | null
+    assetSerial: string | null
   }, ExtArgs["result"]["ticket"]>
   composites: {}
 }
@@ -1255,6 +1683,8 @@ readonly fields: ticketFieldRefs;
 export interface Prisma__ticketClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   admin<T extends Prisma.ticket$adminArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ticket$adminArgs<ExtArgs>>): Prisma.Prisma__adminClient<runtime.Types.Result.GetResult<Prisma.$adminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  client<T extends Prisma.ticket$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ticket$clientArgs<ExtArgs>>): Prisma.Prisma__clientClient<runtime.Types.Result.GetResult<Prisma.$clientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  asset<T extends Prisma.ticket$assetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ticket$assetArgs<ExtArgs>>): Prisma.Prisma__assetClient<runtime.Types.Result.GetResult<Prisma.$assetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1297,6 +1727,8 @@ export interface ticketFieldRefs {
   readonly totalTime: Prisma.FieldRef<"ticket", 'Float'>
   readonly status: Prisma.FieldRef<"ticket", 'String'>
   readonly adminId: Prisma.FieldRef<"ticket", 'Int'>
+  readonly clientId: Prisma.FieldRef<"ticket", 'Int'>
+  readonly assetSerial: Prisma.FieldRef<"ticket", 'String'>
 }
     
 
@@ -1709,6 +2141,44 @@ export type ticket$adminArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.adminInclude<ExtArgs> | null
   where?: Prisma.adminWhereInput
+}
+
+/**
+ * ticket.client
+ */
+export type ticket$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the client
+   */
+  select?: Prisma.clientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the client
+   */
+  omit?: Prisma.clientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.clientInclude<ExtArgs> | null
+  where?: Prisma.clientWhereInput
+}
+
+/**
+ * ticket.asset
+ */
+export type ticket$assetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the asset
+   */
+  select?: Prisma.assetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the asset
+   */
+  omit?: Prisma.assetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.assetInclude<ExtArgs> | null
+  where?: Prisma.assetWhereInput
 }
 
 /**

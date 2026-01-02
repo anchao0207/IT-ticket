@@ -165,7 +165,7 @@ export default function TicketsPage() {
   // if (loading) return <div className="p-8 text-center">Loading tickets...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
+    <div className="bg-gray-50 p-6 dark:bg-gray-900">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
@@ -351,12 +351,13 @@ export default function TicketsPage() {
                       </span>
                     </TableCell>
                     <TableCell>
-                      <button
+                      <Button
+                        variant={"link"}
                         onClick={() => handleOpenTicket(ticket.id)}
-                        className="font-medium text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                        className="font-medium p-0 text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
                       >
                         Edit / View
-                      </button>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))

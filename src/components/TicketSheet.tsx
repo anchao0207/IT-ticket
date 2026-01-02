@@ -296,15 +296,6 @@ export function TicketSheet({
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Location
                   </label>
-                  {/* <select
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    disabled={!canEdit}
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 disabled:bg-gray-100 disabled:text-gray-500 dark:border-gray-600 dark:bg-gray-700"
-                  >
-                    <option value="remote">Remote</option>
-                    <option value="on-site">On-Site</option>
-                  </select> */}
                   <Select
                     value={location}
                     onValueChange={setLocation}

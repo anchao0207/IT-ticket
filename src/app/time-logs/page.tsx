@@ -429,7 +429,7 @@ export default function TimeLogsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
+    <div className=" bg-gray-50 p-6 dark:bg-gray-900">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">

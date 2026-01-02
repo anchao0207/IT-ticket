@@ -52,6 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   ticket: 'ticket',
+  client: 'client',
+  asset: 'asset',
   timelog: 'timelog',
   admin: 'admin'
 } as const
@@ -85,10 +87,36 @@ export const TicketScalarFieldEnum = {
   timeEnd: 'timeEnd',
   totalTime: 'totalTime',
   status: 'status',
-  adminId: 'adminId'
+  adminId: 'adminId',
+  clientId: 'clientId',
+  assetSerial: 'assetSerial'
 } as const
 
 export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
+
+
+export const ClientScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  contactInfo: 'contactInfo',
+  phone: 'phone',
+  address: 'address'
+} as const
+
+export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
+
+
+export const AssetScalarFieldEnum = {
+  serialNumber: 'serialNumber',
+  name: 'name',
+  type: 'type',
+  description: 'description',
+  status: 'status',
+  purchaseDate: 'purchaseDate',
+  clientId: 'clientId'
+} as const
+
+export type AssetScalarFieldEnum = (typeof AssetScalarFieldEnum)[keyof typeof AssetScalarFieldEnum]
 
 
 export const TimelogScalarFieldEnum = {
